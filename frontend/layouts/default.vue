@@ -1,3 +1,7 @@
+<script setup>
+const userStore = useUserStore();
+</script>
+
 <template>
   <div>
     <nav class="p-6 flex items-center justify-between bg-teal-800">
@@ -19,7 +23,7 @@
       </p>
 
       <div class="flex mt-6 md:mt-0 items-center space-x-4">
-        <div class="flex gap-2">
+        <div class="flex gap-2" v-if="userStore.user.isAuthenticated">
           <NuxtLink
             to="/my-jobs"
             class="py-4 px-6 bg-teal-900 hover:bg-teal-700 text-white rounded-xl"
@@ -36,7 +40,7 @@
           >
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex gap-2" v-else>
           <NuxtLink
             to="/login"
             class="py-4 px-6 bg-teal-900 hover:bg-teal-700 text-white rounded-xl"
