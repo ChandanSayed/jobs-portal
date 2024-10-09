@@ -14,7 +14,9 @@
     <slot />
 
     <footer class="p-6 flex flex-wrap items-center justify-between bg-gray-900">
-      <p class="text-gray-300">Copyright (c) 2023 - Djob</p>
+      <p class="text-gray-300">
+        Copyright (c) {{ new Date().getFullYear() }} - Feature Jobs
+      </p>
 
       <div class="flex mt-6 md:mt-0 items-center space-x-4">
         <div class="flex gap-2">
