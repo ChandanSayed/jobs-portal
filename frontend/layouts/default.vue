@@ -1,5 +1,9 @@
 <script setup>
 const userStore = useUserStore();
+
+onMounted(() => {
+  userStore.initStore();
+});
 </script>
 
 <template>
@@ -35,7 +39,8 @@ const userStore = useUserStore();
             >Create job</NuxtLink
           >
           <a
-            class="py-4 px-6 bg-rose-600 hover:bg-rose-700 text-white rounded-xl"
+            @click="userStore.removeToken()"
+            class="py-4 px-6 bg-rose-600 hover:bg-rose-700 text-white rounded-xl cursor-pointer"
             >Log out</a
           >
         </div>

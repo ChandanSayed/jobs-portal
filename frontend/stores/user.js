@@ -40,7 +40,7 @@ export const useUserStore = defineStore({
       this.user.isAuthenticated = false;
 
       localStorage.removeItem("user_token");
-      localStorage.setItem("user_email");
+      localStorage.removeItem("user_email");
     },
   },
 });
