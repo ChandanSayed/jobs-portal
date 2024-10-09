@@ -1,6 +1,38 @@
 <script setup>
+// Query
+
 let queryRef = ref("");
 let query = "";
+
+function performSearch() {
+  queryRef.value = query;
+}
+
+// Categories
+
+let { data: jobCategories } = await useFetch(
+  "http://127.0.0.1:8000/api/jobs/categories"
+);
+let selectedCategoriesRef = ref("");
+let selectedCategories = [];
+
+function toggleCategory(id) {
+  const index = selectedCategories.indexOf(id);
+
+  if (index === -1) {
+    selectedCategories.push(id);
+  } else {
+    selectedCategories.splice(index, 1);
+  }
+
+  selectedCategoriesRef.value = selectedCategories.join(",");
+}
+
+//
+
+let { data: jobs } = await useFetch("http://127.0.0.1:8000/api/jobs/", {
+  query: { query: queryRef, categories: selectedCategoriesRef },
+});
 </script>
 
 <template>
@@ -14,7 +46,10 @@ let query = "";
           class="w-full px-6 py-4 rounded-xl"
         />
 
-        <button class="px-6 py-4 bg-teal-900 text-white rounded-xl">
+        <button
+          class="px-6 py-4 bg-teal-900 text-white rounded-xl"
+          @click="performSearch"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -37,15 +72,23 @@ let query = "";
       <h3 class="mt-6 text-xl text-white">Categories</h3>
 
       <div class="mt-6 space-y-4">
-        <p class="py-4 px-6 text-white rounded-xl" :class="'bg-teal-900'">
-          Category Title
+        <p
+          v-for="category in jobCategories"
+          :key="category.id"
+          @click="toggleCategory(category.id)"
+          class="py-4 px-6 text-white rounded-xl"
+          :class="{
+            'bg-teal-900': selectedCategoriesRef.includes(category.id),
+          }"
+        >
+          {{ category.title }}
         </p>
       </div>
     </div>
 
     <div class="md:col-span-3">
       <div class="space-y-4">
-        <Job />
+        <Job v-for="job in jobs" :key="job.id" :job="job" />
       </div>
     </div>
   </div>
