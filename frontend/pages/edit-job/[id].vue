@@ -1,32 +1,19 @@
 <script setup>
-let category = ref("");
-let title = ref("");
-let description = ref("");
-let position_salary = ref("");
-let position_location = ref("");
-let company_name = ref("");
-let company_location = ref("");
-let company_email = ref("");
+let title = ref(job.value.title);
+let description = ref(job.value.description);
+let position_salary = ref(job.value.position_salary);
+let position_location = ref(job.value.position_location);
+let company_name = ref(job.value.company_name);
+let company_location = ref(job.value.company_location);
+let company_email = ref(job.value.company_email);
 let errors = ref([]);
 </script>
 
 <template>
   <div class="py-10 px-6">
-    <h1 class="mb-6 text-2xl">Create job</h1>
+    <h1 class="mb-6 text-2xl">Edit job</h1>
 
     <form class="space-y-4">
-      <div>
-        <label>Category</label>
-
-        <select
-          v-model="category"
-          class="w-full mt-2 p-4 rounded-xl bg-gray-100"
-        >
-          <option value="">Select category</option>
-          <option>Category</option>
-        </select>
-      </div>
-
       <div>
         <label>Title</label>
         <input
@@ -90,7 +77,7 @@ let errors = ref([]);
       </div>
 
       <button class="py-4 px-6 bg-teal-700 text-white rounded-xl">
-        Submit
+        Save changes
       </button>
     </form>
   </div>
