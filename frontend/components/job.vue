@@ -57,7 +57,10 @@ async function deleteJob(id) {
         class="py-4 px-6 bg-cyan-700 text-white rounded-xl"
         >Edit</NuxtLink
       >
-      <a @click="deleteJob(job.id)" v-if="my" class="py-4 px-6 bg-rose-700 text-white rounded-xl"
+      <a
+        @click="deleteJob(job.id)"
+        v-if="my"
+        class="py-4 px-6 bg-rose-700 text-white rounded-xl cursor-pointer"
         >Delete</a
       >
     </div>
