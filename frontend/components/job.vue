@@ -1,10 +1,34 @@
 <script setup>
+const userStore = useUserStore();
+
+const emit = defineEmits(["deleteJob"]);
+
 const props = defineProps({
-  job: {
-    type: Object,
-    required: true,
+  my: {
+    type: [Boolean]
   },
+  job: {
+    type: [Object]
+  }
 });
+
+async function deleteJob(id) {
+  await $fetch("http://127.0.0.1:8000/api/jobs/" + id + "/delete/", {
+    method: "DELETE",
+    headers: {
+      Authorization: "token " + userStore.user.token,
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => {
+      console.log("response", response);
+
+      emit("deleteJob", id);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 </script>
 
 <template>
@@ -24,19 +48,16 @@ const props = defineProps({
     </div>
 
     <div class="space-x-4">
-      <NuxtLink
-        v-bind:to="'/browse/' + job.id"
-        class="py-4 px-6 bg-teal-700 text-white rounded-xl"
+      <NuxtLink v-bind:to="'/browse/' + job.id" class="py-4 px-6 bg-teal-700 text-white rounded-xl"
         >Details</NuxtLink
       >
       <NuxtLink
-        v-bind:to="'/editjob/' + job.id"
+        v-bind:to="'/edit-job/' + job.id"
+        v-if="my"
         class="py-4 px-6 bg-cyan-700 text-white rounded-xl"
         >Edit</NuxtLink
       >
-      <a
-        @click="deleteJob(job.id)"
-        class="py-4 px-6 bg-rose-700 text-white rounded-xl"
+      <a @click="deleteJob(job.id)" v-if="my" class="py-4 px-6 bg-rose-700 text-white rounded-xl"
         >Delete</a
       >
     </div>

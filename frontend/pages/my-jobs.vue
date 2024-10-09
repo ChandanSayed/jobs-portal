@@ -49,7 +49,7 @@ function deleteJob(id) {
         :key="job.id"
         :job="job"
         :my="true"
-        v-on:deleteJob="deleteJob(job.id)"
+        @click:deleteJob="deleteJob(job.id)"
       />
     </div>
   </div>
