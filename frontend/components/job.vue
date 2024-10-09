@@ -18,17 +18,17 @@
 
     <div class="space-x-4">
       <NuxtLink
-        :to="'/browse/'"
+        :to="'/browse/1'"
         class="py-4 px-6 bg-teal-700 text-white rounded-xl"
         >Details</NuxtLink
       >
       <NuxtLink
-        :to="'/edit-job/'"
+        :to="'/edit-job/1'"
         class="py-4 px-6 bg-cyan-700 text-white rounded-xl"
         >Edit</NuxtLink
       >
       <a
-        @click="deleteJob(job.id)"
+        @click="deleteJob(id)"
         class="py-4 px-6 bg-rose-700 text-white rounded-xl"
         >Delete</a
       >

@@ -1,11 +1,11 @@
 <script setup>
-let title = ref(job.value.title);
-let description = ref(job.value.description);
-let position_salary = ref(job.value.position_salary);
-let position_location = ref(job.value.position_location);
-let company_name = ref(job.value.company_name);
-let company_location = ref(job.value.company_location);
-let company_email = ref(job.value.company_email);
+let title = ref();
+let description = ref();
+let position_salary = ref();
+let position_location = ref();
+let company_name = ref();
+let company_location = ref();
+let company_email = ref();
 let errors = ref([]);
 </script>
 
